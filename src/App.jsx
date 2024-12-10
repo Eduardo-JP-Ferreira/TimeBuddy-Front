@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router';
+import Login from './pages/Login.jsx';
 
 function App() {
   return (
-    <>
-      <h1>Iniciando Projeto!</h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
