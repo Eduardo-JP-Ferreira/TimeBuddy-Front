@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router';
 
-function Login() {
+function SignUp() {
   return (
     <ContainerPage>
       <ContainerLogo>
@@ -10,17 +10,25 @@ function Login() {
       </ContainerLogo>
       <ContainerFormulario>
         <Form>
+          <Input placeholder="nome" type="name" name="name" autoComplete="name" required />
           <Input placeholder="e-mail" type="email" name="email" autoComplete="email" required />
-          <Input placeholder="password" type="password" name="password" autoComplete="password" required />
-          <Button type="submit">Entrar</Button>
-          <Link to="/sign-up">Criar uma conta!</Link>
+          <Input placeholder="senha" type="password" name="password" autoComplete="password" required />
+          <Input
+            placeholder="confirmar senha"
+            type="password"
+            name="verify-password"
+            autoComplete="password"
+            required
+          />
+          <Button type="submit">Cadastrar</Button>
+          <Link to="/">Já tem uma conta? Entrar</Link>
         </Form>
       </ContainerFormulario>
     </ContainerPage>
   );
 }
 
-export default Login;
+export default SignUp;
 
 const ContainerPage = styled.div`
   width: 100vw;
