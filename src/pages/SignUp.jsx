@@ -1,7 +1,46 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
+import axios from 'axios';
 
 function SignUp() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    verifyPassword: '',
+  });
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.verifyPassword) {
+      alert('As senhas não são iguais!');
+      return;
+    }
+
+    try {
+      /*
+      const response = await axios.post('https://...', {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      console.log('Cadastro realizado com sucesso:', response.data);
+      */
+      console.log('Cadastro realizado com sucesso:', formData);
+      alert('Cadastro realizado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao cadastrar:', error.response?.data || error.message);
+      alert('Erro ao realizar cadastro. Tente novamente.');
+    }
+  };
+
   return (
     <ContainerPage>
       <ContainerLogo>
@@ -9,15 +48,41 @@ function SignUp() {
         <h2>Seu Gerenciador de Ponto Eletrônico</h2>
       </ContainerLogo>
       <ContainerFormulario>
-        <Form>
-          <Input placeholder="nome" type="name" name="name" autoComplete="name" required />
-          <Input placeholder="e-mail" type="email" name="email" autoComplete="email" required />
-          <Input placeholder="senha" type="password" name="password" autoComplete="password" required />
+        <Form onSubmit={handleSubmit}>
+          <Input
+            placeholder="nome"
+            type="name"
+            name="name"
+            autoComplete="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            placeholder="e-mail"
+            type="email"
+            name="email"
+            autoComplete="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            placeholder="senha"
+            type="password"
+            name="password"
+            autoComplete="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
           <Input
             placeholder="confirmar senha"
             type="password"
-            name="verify-password"
+            name="verifyPassword"
             autoComplete="password"
+            value={formData.verifyPassword}
+            onChange={handleChange}
             required
           />
           <Button type="submit">Cadastrar</Button>
@@ -37,9 +102,6 @@ const ContainerPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  //justify-content: space-evenly;
-
-  //background-color: #424242;
 `;
 
 const ContainerLogo = styled.div`
@@ -60,18 +122,14 @@ const ContainerLogo = styled.div`
     font-size: 16px;
     font-style: italic;
   }
-
-  //background-color: #524a4a;
 `;
 
 const ContainerFormulario = styled.div`
   width: 40%;
   min-width: 300px;
   height: 70vh;
-  //background-color: lightslategray;
   display: flex;
   justify-content: center;
-  //align-items: center;
 `;
 
 const Form = styled.form`
