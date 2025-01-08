@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function SignUp() {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     verifyPassword: '',
@@ -27,7 +27,7 @@ function SignUp() {
     try {
       /*
       const response = await axios.post('https://...', {
-        name: formData.name,
+        username: formData.username,
         email: formData.email,
         password: formData.password,
       });
@@ -53,9 +53,9 @@ function SignUp() {
           <Input
             placeholder="nome"
             type="name"
-            name="name"
-            autoComplete="name"
-            value={formData.name}
+            name="username"
+            autoComplete="username"
+            value={formData.username}
             onChange={handleChange}
             required
           />
