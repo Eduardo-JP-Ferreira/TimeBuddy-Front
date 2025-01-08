@@ -1,7 +1,39 @@
+import { useState } from 'react';
+
 import styled from 'styled-components';
 import { Link } from 'react-router';
+import axios from 'axios';
 
 function Login() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      /*
+      const response = await axios.post('https://...', {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      console.log('Login realizado com sucesso:', response.data);
+      */
+      console.log('Login realizado com sucesso:', formData);
+      alert('Login realizado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao realizar Login:', error.response?.data || error.message);
+      alert('Erro ao realizar Login. Tente novamente.');
+    }
+  };
+
   return (
     <ContainerPage>
       <ContainerLogo>
@@ -9,9 +41,25 @@ function Login() {
         <h2>Seu Gerenciador de Ponto Eletrônico</h2>
       </ContainerLogo>
       <ContainerFormulario>
-        <Form>
-          <Input placeholder="e-mail" type="email" name="email" autoComplete="email" required />
-          <Input placeholder="password" type="password" name="password" autoComplete="password" required />
+        <Form onSubmit={handleSubmit}>
+          <Input
+            placeholder="e-mail"
+            type="email"
+            name="email"
+            autoComplete="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            placeholder="password"
+            type="password"
+            name="password"
+            autoComplete="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
           <Button type="submit">Entrar</Button>
           <Link to="/sign-up">Criar uma conta!</Link>
         </Form>

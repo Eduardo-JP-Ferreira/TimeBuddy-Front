@@ -13,6 +13,7 @@ function SignUp() {
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData);
   }
 
   const handleSubmit = async (e) => {
@@ -72,6 +73,7 @@ function SignUp() {
             type="password"
             name="password"
             autoComplete="password"
+            minLength={3}
             value={formData.password}
             onChange={handleChange}
             required
@@ -81,6 +83,7 @@ function SignUp() {
             type="password"
             name="verifyPassword"
             autoComplete="password"
+            minLength={3}
             value={formData.verifyPassword}
             onChange={handleChange}
             required
